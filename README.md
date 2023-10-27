@@ -1,5 +1,5 @@
 # PawnDemonium
-A Game built By Myself and CJ For Dink Dev Game Jam in Unreal Engine
+A Game built By [Chukwuyenum Opone](https://github.com/officialyenum) and [CJ](https://github.com/Codutola) For Dink Dev Game Jam using Unreal Engine
 
 ## Description
 
@@ -24,6 +24,7 @@ Every Unreal Engine user started somewhere. Whether you're new to real-time or a
 
 - Authors 
     - [Chukwuyenum Opone](https://github.com/officialyenum)
+    - [CeeJay](https://github.com/Codutola)
 
 ## License
 
