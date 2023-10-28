@@ -16,4 +16,14 @@ class PAWNDEMONIUM_API APDEnemy : public APDCharacterBase
 
 public:
 	APDEnemy();
+
+protected:
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
+	// APawn interface
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	// To add mapping context
+	virtual void BeginPlay();
 };
