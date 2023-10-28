@@ -92,20 +92,26 @@ void APDCharacter::Look(const FInputActionValue& Value)
 
 void APDCharacter::Shoot(const FInputActionValue& Value)
 {
+	bIsShooting = true;
 }
 
 void APDCharacter::StopShooting(const FInputActionValue& Value)
 {
+	bIsShooting = false;
 }
 
 void APDCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	// Set up action bindings
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent)) {
-
-		//Jumping
+		
+		//Shooting
 		EnhancedInputComponent->BindAction(ShootAction, ETriggerEvent::Triggered, this, &APDCharacter::Shoot);
 		EnhancedInputComponent->BindAction(ShootAction, ETriggerEvent::Completed, this, &APDCharacter::StopShooting);
+
+		//Jumping
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ACharacter::Jump);
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 
 		//Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APDCharacter::Move);
