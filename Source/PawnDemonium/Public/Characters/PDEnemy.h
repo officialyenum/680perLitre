@@ -13,5 +13,7 @@ UCLASS()
 class PAWNDEMONIUM_API APDEnemy : public APDCharacterBase
 {
 	GENERATED_BODY()
-	
+
+public:
+	APDEnemy();
 };
