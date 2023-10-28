@@ -48,7 +48,7 @@ public:
 	 UInputAction* JumpAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
-	float FuelCapacity;
+	float GasCapacity;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon attributes")
 	float WeaponRange;

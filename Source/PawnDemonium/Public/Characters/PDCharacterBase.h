@@ -13,14 +13,14 @@ class PAWNDEMONIUM_API APDCharacterBase : public ACharacter
 
 public:
 
-	UPROPERTY(BlueprintReadWrite, Category = "attributes")
-	float Hp = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
+	float Hp = 100.f;
 
-	UPROPERTY(BlueprintReadWrite, Category = "attributes")
-	float Speed = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
+	float Speed = 100.f;
 
-	UPROPERTY(BlueprintReadWrite, Category = "attributes")
-	float Attack = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
+	float Attack = 10.f;
 	// Sets default values for this character's properties
 	APDCharacterBase();
 
@@ -35,7 +35,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "attributes")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Attributes")
 	TObjectPtr<UStaticMeshComponent> PawnMesh;
 
 };

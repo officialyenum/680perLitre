@@ -21,6 +21,12 @@ APDCharacter::APDCharacter()
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
 
+	// Set Attributes
+	Hp = 100.f;
+	Attack = 10.f;
+	Speed = 100.f;
+	GasCapacity = 100.f;
+
 	// Configure character movement
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f); // ...at this rotation rate
@@ -92,7 +98,13 @@ void APDCharacter::Look(const FInputActionValue& Value)
 
 void APDCharacter::Shoot(const FInputActionValue& Value)
 {
-	bIsShooting = true;
+	if (GasCapacity >= 0) {
+
+		// enable shooting
+		bIsShooting = true;
+		// reduce gas
+		GasCapacity -= 0.01f;
+	}
 }
 
 void APDCharacter::StopShooting(const FInputActionValue& Value)
