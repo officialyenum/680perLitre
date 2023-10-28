@@ -45,11 +45,16 @@ public:
 
 	/** Jump Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* JumpAction;
+	 UInputAction* JumpAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
 	float FuelCapacity;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon attributes")
+	float WeaponRange;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon attributes")
+	bool bIsShooting;
 
 protected:
 
@@ -78,11 +83,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon attributes")
 	TObjectPtr<UStaticMeshComponent> Weapon;
 
-	UPROPERTY(EditAnywhere, Category = "Weapon attributes")
-	float WeaponRange;
-
-	UPROPERTY(EditAnywhere, Category = "Weapon attributes")
-	bool bIsShooting;
 
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
