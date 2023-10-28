@@ -59,10 +59,62 @@ APDCharacter::APDCharacter()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
 
+void APDCharacter::BeginPlay()
+{
+	// Call the base class  
+	Super::BeginPlay();
+
+	//Add Input Mapping Context
+	if (const APlayerController* PlayerController = Cast<APlayerController>(Controller))
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
+		{
+			Subsystem->AddMappingContext(DefaultMappingContext, 0);
+		}
+	}
+}
+
+float APDCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator,
+	AActor* DamageCauser)
+{
+	const float ActualDamageApplied = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+
+	//TODO: Implement how the character responds to the damage taken
+	// For instance, decrease health, trigger animations, or other effects
+
+	// Reduce health by the damage amount
+	Hp -= DamageAmount;
+
+	// Implement any death conditions or other responses to being damaged
+	if (Hp <= 0)
+	{
+		// Character has died, perform death logic
+		Die();
+	}
+
+	return ActualDamageApplied;
+}
+
+
+// Called every frame
+void APDCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	if (Hp <= 0)
+	{
+		UE_LOG(LogTemp, Display, TEXT("You Died"));
+	}
+	if (GasCapacity <= 0)
+	{
+		UE_LOG(LogTemp, Display, TEXT("You Ran out of Gas"));
+	}
+
+}
+
 void APDCharacter::Move(const FInputActionValue& Value)
 {
 	// input is a Vector2D
-	FVector2D MovementVector = Value.Get<FVector2D>();
+	const FVector2D MovementVector = Value.Get<FVector2D>();
 
 	if (Controller != nullptr)
 	{
@@ -86,7 +138,7 @@ void APDCharacter::Move(const FInputActionValue& Value)
 void APDCharacter::Look(const FInputActionValue& Value)
 {
 	// input is a Vector2D
-	FVector2D LookAxisVector = Value.Get<FVector2D>();
+	const FVector2D LookAxisVector = Value.Get<FVector2D>();
 
 	if (Controller != nullptr)
 	{
@@ -99,7 +151,6 @@ void APDCharacter::Look(const FInputActionValue& Value)
 void APDCharacter::Shoot(const FInputActionValue& Value)
 {
 	if (GasCapacity >= 0) {
-
 		// enable shooting
 		bIsShooting = true;
 		// reduce gas
@@ -110,6 +161,11 @@ void APDCharacter::Shoot(const FInputActionValue& Value)
 void APDCharacter::StopShooting(const FInputActionValue& Value)
 {
 	bIsShooting = false;
+}
+
+void APDCharacter::Die()
+{
+	UE_LOG(LogTemp, Display, TEXT("You Died"));
 }
 
 void APDCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -134,17 +190,3 @@ void APDCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	}
 }
 
-void APDCharacter::BeginPlay()
-{
-	// Call the base class  
-	Super::BeginPlay();
-
-	//Add Input Mapping Context
-	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
-	{
-		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
-		{
-			Subsystem->AddMappingContext(DefaultMappingContext, 0);
-		}
-	}
-}

@@ -49,6 +49,12 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
 	float GasCapacity;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
+	float Kills = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
+	float Target = 20;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon attributes")
 	float WeaponRange;
@@ -70,19 +76,24 @@ protected:
 	/** Called for shooting input */
 	void StopShooting(const FInputActionValue& Value);
 
-
-protected:
+	static void Die();
+		
+	virtual void Tick(float DeltaTime) override;
+	
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	// To add mapping context
-	virtual void BeginPlay();
+	virtual void BeginPlay() override;
 
+	
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon attributes")
 	TObjectPtr<UStaticMeshComponent> Weapon;
-
+	
+	// Override TakeDamage
+	virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
