@@ -18,10 +18,6 @@ APDEnemy::APDEnemy()
 	EnemyType = EChessPieceType::Knight;
 	MoveRange = 200;
 	
-	CollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionBox"));
-	CollisionBox->SetupAttachment(RootComponent); // Attach to the enemy root component or mesh
-	CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &APDEnemy::OnOverlapBegin);
-	
 	FTimerHandle TimerHandleAIMove;
 	// Call MoveBishop every 5 seconds
 	// GetWorld()->GetTimerManager().SetTimer(TimerHandleAIMove, this, &APDEnemy::AIMove, 5.0f, true);
@@ -41,6 +37,7 @@ void APDEnemy::BeginPlay()
 
 void APDEnemy::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	UE_LOG(LogTemp, Warning, TEXT("Overlap Began"));
 	if (OtherActor && OtherActor != this && OtherActor->IsA(APDCharacter::StaticClass()))
 	{
 		// Cast to your main character class and deal damage
