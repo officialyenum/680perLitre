@@ -53,7 +53,7 @@ void APDEnemy::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Other
 			FVector PushDirection = OtherActor->GetActorLocation() - GetActorLocation();
 			PushDirection.Normalize();
 			// Apply a force to push the character away
-			constexpr float PushForce = Attack * 20.f;
+			const float PushForce = Attack * 20.f;
 			PDCharacter->LaunchCharacter(PushDirection * PushForce, true, true);
 		}
 	}
@@ -117,8 +117,8 @@ void APDEnemy::BishopMove()
 	}
 	const FVector StartLocation = GetActorLocation();
 	const FVector EndLocation = StartLocation + FVector(XDirection, YDirection, 0.f); // Move 200 units up
-	constexpr float Duration = 1.0f;
-	constexpr float ElapsedTime = 5.0f;
+	const float Duration = 1.0f;
+	const float ElapsedTime = 5.0f;
 
 	// Interpolate for the upward movement
 	const FVector NewLocationUp = FMath::Lerp(StartLocation, EndLocation, FMath::Clamp(ElapsedTime / Duration, 0.0f, 1.0f));
@@ -154,8 +154,8 @@ void APDEnemy::RookMove()
 	}
 	const FVector StartLocation = GetActorLocation();
 	const FVector EndLocation = StartLocation + FVector(XDirection, YDirection, 0.f); // Move 200 units up
-	constexpr float Duration = 1.0f;
-	constexpr float ElapsedTime = 5.0f;
+	const float Duration = 1.0f;
+	const float ElapsedTime = 5.0f;
 
 	// Interpolate for the upward movement
 	const FVector NewLocationUp = FMath::Lerp(StartLocation, EndLocation, FMath::Clamp(ElapsedTime / Duration, 0.0f, 1.0f));
@@ -169,8 +169,8 @@ void APDEnemy::KnightMove()
 	// Simulate the knight's move (200 units up then 200 units right)
 	const FVector StartLocation = GetActorLocation();
 	const FVector EndLocation = StartLocation + FVector(0, MoveRange, 0); // Move 200 units up
-	constexpr float Duration = 1.0f;
-	constexpr float ElapsedTime = 5.0f;
+	const float Duration = 1.0f;
+	const float ElapsedTime = 5.0f;
 
 	// Interpolate for the upward movement
 	const FVector NewLocationUp = FMath::Lerp(StartLocation, EndLocation, FMath::Clamp(ElapsedTime / Duration, 0.0f, 1.0f));
@@ -180,6 +180,8 @@ void APDEnemy::KnightMove()
 
 	FTimerHandle MoveDelayTimer;
 	const FTimerDelegate MoveRightDelegate = FTimerDelegate::CreateLambda([this]() {
+		const float Duration = 1.0f;
+		const float ElapsedTime = 5.0f;
 		const float Direction = FMath::RandBool() == true ? MoveRange : -MoveRange;
 		const FVector NewEndLocation = GetActorLocation() + FVector(Direction, 0, 0); // Move 200 units right or left
 		// Interpolate for the upward movement
@@ -238,8 +240,8 @@ void APDEnemy::QueenMove()
 	}
 	const FVector StartLocation = GetActorLocation();
 	const FVector EndLocation = StartLocation + FVector(XDirection, YDirection, 0.f); // Move 200 units up
-	constexpr float Duration = 1.0f;
-	constexpr float ElapsedTime = 5.0f;
+	const float Duration = 1.0f;
+	const float ElapsedTime = 5.0f;
 
 	// Interpolate for the upward movement
 	const FVector NewLocationUp = FMath::Lerp(StartLocation, EndLocation, FMath::Clamp(ElapsedTime / Duration, 0.0f, 1.0f));
