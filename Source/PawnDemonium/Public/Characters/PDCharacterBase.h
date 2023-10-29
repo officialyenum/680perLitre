@@ -24,14 +24,14 @@ public:
 	// Sets default values for this character's properties
 	APDCharacterBase();
 
+	UFUNCTION(BlueprintCallable, Category="Character Attributes")
+	void CauseDamage(float DamageAmount);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
+public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 

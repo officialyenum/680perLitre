@@ -30,5 +30,5 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintPure,Category = "Spawning")
-	FVector GetSpawningPoint();
+	FVector GetSpawningPoint() const;
 };

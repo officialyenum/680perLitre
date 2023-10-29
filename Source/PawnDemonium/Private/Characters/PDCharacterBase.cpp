@@ -17,18 +17,15 @@ APDCharacterBase::APDCharacterBase()
 
 }
 
+void APDCharacterBase::CauseDamage(float DamageAmount)
+{
+	Hp -= FMath::Min(Hp, DamageAmount);
+}
+
 // Called when the game starts or when spawned
 void APDCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
-	
-}
-
-// Called every frame
-void APDCharacterBase::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input

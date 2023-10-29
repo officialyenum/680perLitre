@@ -29,10 +29,10 @@ void ASpawnVolume::Tick(float DeltaTime)
 
 }
 
-FVector ASpawnVolume::GetSpawningPoint()
+FVector ASpawnVolume::GetSpawningPoint() const
 {
-	FVector Extent = SpawningBox->GetScaledBoxExtent();
-	FVector Origin = SpawningBox->GetComponentLocation();
+	const FVector Extent = SpawningBox->GetScaledBoxExtent();
+	const FVector Origin = SpawningBox->GetComponentLocation();
 
 	return UKismetMathLibrary::RandomPointInBoundingBox(Origin, Extent);
 }
