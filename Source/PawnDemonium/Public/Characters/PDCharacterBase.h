@@ -14,13 +14,13 @@ class PAWNDEMONIUM_API APDCharacterBase : public ACharacter
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
-	float Hp = 100.f;
+	int32 Hp = 100.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
 	float Speed = 100.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
-	float Attack = 10.f;
+	int32 Attack = 10.f;
 	// Sets default values for this character's properties
 	APDCharacterBase();
 

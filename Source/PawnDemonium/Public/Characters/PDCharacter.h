@@ -18,6 +18,9 @@ class PAWNDEMONIUM_API APDCharacter : public APDCharacterBase
 
 public:
 	APDCharacter();
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
+	int32 MaxHp = 100;
 
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
@@ -51,10 +54,10 @@ public:
 	float GasCapacity;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
-	float Kills = 0;
+	int32 Kills = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
-	float Target = 20;
+	int32 Target = 20;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon attributes")
 	float WeaponRange;
