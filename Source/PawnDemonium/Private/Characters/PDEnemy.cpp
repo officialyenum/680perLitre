@@ -56,6 +56,14 @@ void APDEnemy::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Other
 	}
 }
 
+
+
+void APDEnemy::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Overlap End"));
+	
+}
+
 void APDEnemy::AIMove()
 {
 	switch (EnemyType)
@@ -260,5 +268,6 @@ void APDEnemy::Tick(float DeltaTime)
 	if (Hp <= 0)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Enemy Died"));
+		Destroy();
 	}
 }

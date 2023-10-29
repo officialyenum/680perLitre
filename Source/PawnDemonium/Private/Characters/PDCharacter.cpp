@@ -10,6 +10,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Spawner/Projectile.h"
 
 APDCharacter::APDCharacter()
 {
@@ -155,6 +156,21 @@ void APDCharacter::Shoot(const FInputActionValue& Value)
 		bIsShooting = true;
 		// reduce gas
 		GasCapacity -= 0.01f;
+
+		// Get the position and direction of the gun for projectile spawning
+		FVector GunLocation = Weapon->GetComponentLocation();
+		FVector ShootingDirection = Weapon->GetForwardVector(); // Assuming Z-axis is the forward direction
+
+		// Spawn a sphere collider (projectile) at the gun's position
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.Owner = this; // Set the character as the owner of the spawned projectile
+
+		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(GunLocation, FRotator::ZeroRotator, SpawnParams);
+
+		if (Projectile)
+		{
+			Projectile->SetShootingDirection(ShootingDirection);
+		}
 	}
 }
 

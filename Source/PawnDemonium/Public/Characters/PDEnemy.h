@@ -27,10 +27,6 @@ class PAWNDEMONIUM_API APDEnemy : public APDCharacterBase
 public:
 	APDEnemy();
 	
-	/** Collision Box to inflict Damage */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Enemy Attributes", meta = (AllowPrivateAccess = "true"))
-	UBoxComponent* CollisionBox;
-	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy Attributes")
 	EChessPieceType EnemyType;
 
@@ -39,7 +35,8 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy Attributes")
 	float MoveRange;
-	
+
+
 
 protected:
 	// Called every frame
@@ -50,11 +47,13 @@ protected:
 
 	// To add mapping context
 	virtual void BeginPlay() override;
+	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	                    int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
-	void AIMove();
-	
+	UFUNCTION()
+	void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
 	void BishopMove();
 	
 	void RookMove();
@@ -65,4 +64,9 @@ protected:
 	
 	void KingMove();
 	
+public:
+
+	UFUNCTION(BlueprintCallable)
+	virtual void AIMove();
+
 };

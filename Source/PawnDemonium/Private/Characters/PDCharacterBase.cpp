@@ -22,6 +22,11 @@ void APDCharacterBase::CauseDamage(float DamageAmount)
 	Hp -= FMath::Min(Hp, DamageAmount);
 }
 
+void APDCharacterBase::DealDamage(APDCharacterBase *otherActor, float DamageAmount)
+{
+	otherActor->CauseDamage(DamageAmount);
+}
+
 // Called when the game starts or when spawned
 void APDCharacterBase::BeginPlay()
 {
