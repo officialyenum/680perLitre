@@ -261,6 +261,11 @@ void APDEnemy::KingMove()
 }
 
 
+void APDEnemy::DealCharacterDamage(APDCharacter* otherActor, float DamageAmount)
+{
+	otherActor->CauseDamage(DamageAmount);
+}
+
 void APDEnemy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);

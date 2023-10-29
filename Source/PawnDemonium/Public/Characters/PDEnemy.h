@@ -37,6 +37,8 @@ public:
 	float MoveRange;
 
 
+	UFUNCTION(BlueprintCallable, Category = "Character Attributes")
+	void DealCharacterDamage(APDCharacter* player, float DamageAmount);
 
 protected:
 	// Called every frame

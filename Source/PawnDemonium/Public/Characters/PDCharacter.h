@@ -65,6 +65,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon attributes")
 	bool bIsShooting;
 
+	UFUNCTION(BlueprintCallable, Category = "Character Attributes")
+	void DealEnemyDamage(APDEnemy* otherActor, float DamageAmount);
+
 protected:
 
 	/** Called for movement input */

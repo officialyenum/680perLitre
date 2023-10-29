@@ -11,6 +11,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Spawner/Projectile.h"
+#include "Characters/PDEnemy.h"
 
 APDCharacter::APDCharacter()
 {
@@ -110,6 +111,11 @@ void APDCharacter::Tick(float DeltaTime)
 		UE_LOG(LogTemp, Display, TEXT("You Ran out of Gas"));
 	}
 
+}
+
+void APDCharacter::DealEnemyDamage(APDEnemy* otherActor, float DamageAmount)
+{
+	otherActor->CauseDamage(DamageAmount);
 }
 
 void APDCharacter::Move(const FInputActionValue& Value)

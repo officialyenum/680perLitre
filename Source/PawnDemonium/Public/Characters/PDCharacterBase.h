@@ -27,9 +27,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Character Attributes")
 	void CauseDamage(float DamageAmount);
 
-	UFUNCTION(BlueprintCallable, Category = "Character Attributes")
-	void DealDamage(APDCharacterBase* player, float DamageAmount);
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
