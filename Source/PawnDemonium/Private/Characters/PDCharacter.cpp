@@ -25,9 +25,10 @@ APDCharacter::APDCharacter()
 
 	// Set Attributes
 	Hp = 100.f;
+	MaxHp = 100;
 	Attack = 10.f;
-	Speed = 100.f;
-	GasCapacity = 100.f;
+	Gas = 100.f;
+	MaxGas = 100.f;
 
 	// Configure character movement
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
@@ -55,7 +56,7 @@ APDCharacter::APDCharacter()
 
 	// Create a Weapon
 	Weapon = CreateDefaultSubobject<UStaticMeshComponent>("Weapon");
-	Weapon->SetupAttachment(PawnMesh);
+	Weapon->SetupAttachment(GetMesh());
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
@@ -106,16 +107,11 @@ void APDCharacter::Tick(float DeltaTime)
 	{
 		UE_LOG(LogTemp, Display, TEXT("You Died"));
 	}
-	if (GasCapacity <= 0)
+	if (Gas <= 0)
 	{
 		UE_LOG(LogTemp, Display, TEXT("You Ran out of Gas"));
 	}
 
-}
-
-void APDCharacter::DealEnemyDamage(APDEnemy* otherActor, float DamageAmount)
-{
-	otherActor->CauseDamage(DamageAmount);
 }
 
 void APDCharacter::Move(const FInputActionValue& Value)
@@ -157,23 +153,21 @@ void APDCharacter::Look(const FInputActionValue& Value)
 
 void APDCharacter::Shoot(const FInputActionValue& Value)
 {
-	if (GasCapacity >= 0) {
+	if (Gas >= 0) {
 		// enable shooting
 		bIsShooting = true;
 		// reduce gas
-		GasCapacity -= 0.01f;
+		Gas -= 0.01f;
 
 		// Get the position and direction of the gun for projectile spawning
-		FVector GunLocation = Weapon->GetComponentLocation();
-		FVector ShootingDirection = Weapon->GetForwardVector(); // Assuming Z-axis is the forward direction
+		const FVector GunLocation = Weapon->GetComponentLocation();
+		const FVector ShootingDirection = Weapon->GetForwardVector(); // Assuming Z-axis is the forward direction
 
 		// Spawn a sphere collider (projectile) at the gun's position
 		FActorSpawnParameters SpawnParams;
 		SpawnParams.Owner = this; // Set the character as the owner of the spawned projectile
 
-		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(GunLocation, FRotator::ZeroRotator, SpawnParams);
-
-		if (Projectile)
+		if (AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(GunLocation, FRotator::ZeroRotator, SpawnParams))
 		{
 			Projectile->SetShootingDirection(ShootingDirection);
 		}

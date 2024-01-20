@@ -19,8 +19,6 @@ class PAWNDEMONIUM_API APDCharacter : public APDCharacterBase
 public:
 	APDCharacter();
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
-	int32 MaxHp = 100;
 
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
@@ -49,9 +47,6 @@ public:
 	/** Jump Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* JumpAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
-	float GasCapacity;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
 	int32 Kills = 0;
@@ -64,9 +59,6 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon attributes")
 	bool bIsShooting;
-
-	UFUNCTION(BlueprintCallable, Category = "Character Attributes")
-	void DealEnemyDamage(APDEnemy* otherActor, float DamageAmount);
 
 protected:
 
@@ -92,7 +84,6 @@ protected:
 	// To add mapping context
 	virtual void BeginPlay() override;
 
-	
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon attributes")

@@ -12,30 +12,27 @@ class PAWNDEMONIUM_API APDCharacterBase : public ACharacter
 	GENERATED_BODY()
 
 public:
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
-	int32 Hp = 100.f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
-	float Speed = 100.f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
-	int32 Attack = 10.f;
-	// Sets default values for this character's properties
 	APDCharacterBase();
 
 	UFUNCTION(BlueprintCallable, Category="Character Attributes")
 	void CauseDamage(float DamageAmount);
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
+	float Hp;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
+	float MaxHp;
 
-public:
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
+	float Gas;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
+	float MaxGas;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Attributes")
-	TObjectPtr<UStaticMeshComponent> PawnMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Attributes")
+	float Attack;
 
 };

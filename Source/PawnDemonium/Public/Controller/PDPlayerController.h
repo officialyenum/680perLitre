@@ -13,5 +13,13 @@ UCLASS()
 class PAWNDEMONIUM_API APDPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-	
+
+public:
+	APDPlayerController();
+	virtual void PlayerTick(float DeltaTime) override;
+
+protected:
+	virtual void BeginPlay() override;
+
+private:
 };

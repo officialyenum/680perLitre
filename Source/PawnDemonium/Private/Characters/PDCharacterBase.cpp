@@ -7,14 +7,7 @@
 APDCharacterBase::APDCharacterBase()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
-	// Remove the skeletal mesh component
-	GetMesh()->DestroyComponent();
-
-	PawnMesh = CreateDefaultSubobject<UStaticMeshComponent>("PawnMesh");
-	PawnMesh->SetupAttachment(GetRootComponent());
-
+	PrimaryActorTick.bCanEverTick = false;
 }
 
 void APDCharacterBase::CauseDamage(float DamageAmount)
@@ -26,12 +19,5 @@ void APDCharacterBase::CauseDamage(float DamageAmount)
 void APDCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
-}
-
-// Called to bind functionality to input
-void APDCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
